@@ -32,11 +32,9 @@ import javax.servlet.http.HttpSession;
  */
 public class BotCheckerImpl implements BotChecker, AutoCloseable, Serializable {
 
-    private static final String CLASS_NAME = BotCheckerImpl.class.getName();
+    private transient static final Logger LOG = Logger.getLogger(BotCheckerImpl.class.getName());
     
-    private transient static final Logger LOG = Logger.getLogger(CLASS_NAME);
-    
-    public static final String BOT_ATTRIBUTE_NAME = CLASS_NAME + ".botCategory";
+    public static final String BOT_ATTRIBUTE_NAME = BotCheckerImpl.class.getName() + ".botCategory";
         
     private final BotCache botCache;
     
@@ -204,8 +202,8 @@ public class BotCheckerImpl implements BotChecker, AutoCloseable, Serializable {
             result = BotCategory.NONE;
         }
         
-        if(LOG.isLoggable(Level.FINER)) {
-            LOG.log(Level.FINER, "BotType: {0}, address: {1}, host: {2}, User-Agent: {3}, requestURI: {4}", 
+        if(LOG.isLoggable(Level.FINEST)) {
+            LOG.log(Level.FINEST, "BotType: {0}, address: {1}, host: {2}, User-Agent: {3}, requestURI: {4}", 
                     new Object[]{result, address, host, userAgent, requestURI});        
         }
         
