@@ -24,6 +24,7 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -40,7 +41,7 @@ public class BotCheckerImpl implements BotChecker, AutoCloseable, Serializable {
     
     private final Collection<String> trapfiles;
     
-    private final BiFunction<HttpServletRequest, String, String> getIp;
+    private final BiFunction<ServletRequest, String, String> getIp;
 
     public BotCheckerImpl() {
         this(BotCache.NO_OP, Collections.EMPTY_LIST);

@@ -17,6 +17,7 @@
 package com.looseboxes.botchecker.util;
 
 import java.util.function.BiFunction;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
  * @see https://gist.github.com/nioe/11477264
  * @author Chinomso Bassey Ikwuagwu on Jan 14, 2019 3:07:04 PM
  */
-public class GetClientIpAddress implements BiFunction<HttpServletRequest, String, String> {
+public class GetClientIpAddress implements BiFunction<ServletRequest, String, String> {
 
 //    public static final String HEADER_AUTHORIZATION = "Authorization",
 //    AUTHENTICATION_TYPE_BASIC("Basic"),
@@ -39,16 +40,15 @@ public class GetClientIpAddress implements BiFunction<HttpServletRequest, String
     public static final String HTTP_X_FORWARDED_FOR = "HTTP_X_FORWARDED_FOR";
 
     @Override
-    public String apply(HttpServletRequest request, String resultIfNone) {
-        return this.execute(request, resultIfNone);
+    public String apply(ServletRequest request, String resultIfNone) {
+        String ip = request instanceof HttpServletRequest ? getIpAddressFromHeaders((HttpServletRequest)request, null) : null;
+        if(ip == null) {
+            ip = request.getRemoteAddr();
+        }
+        return ip == null ? resultIfNone : ip;
     }
-    
-    public String execute(HttpServletRequest request) {
-        
-        return this.execute(request, request.getRemoteAddr());
-    }
-    
-    public String execute(HttpServletRequest request, String resultIfNone) {
+
+    public String getIpAddressFromHeaders(HttpServletRequest request, String resultIfNone) {
         
         String ip = null;
         
