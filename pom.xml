@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.poshjosh</groupId>
+        <groupId>io.github.poshjosh</groupId>
         <artifactId>parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>    
     
-    <groupId>com.github.poshjosh</groupId>
+    <groupId>io.github.poshjosh</groupId>
     <artifactId>bcbotchecker</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
